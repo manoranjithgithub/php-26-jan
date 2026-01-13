@@ -1,5 +1,5 @@
 <?php
-$host = "world-1-mssql.env-te2ifplcfh";      // Nimbuz DB host
+$host = "tools-a-mysql.env-te2ifplcfh";      // Nimbuz DB host
 $user = "sa";       // MySQL username
 $pass = "Test@12345";   // MySQL password
 $db   = "sample";       // Database name
