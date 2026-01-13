@@ -8,9 +8,18 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
-if (mysqli_query($conn, $sql)) {
-    echo "✅ Table 'users' created successfully";
-} else {
-    echo "❌ Error creating table: " . mysqli_error($conn);
+try {
+    if ($DB_TYPE === 'mysqli') {
+        if (mysqli_query($conn, $sql)) {
+            echo "✅ Table 'users' created successfully";
+        } else {
+            echo "❌ Error creating table: " . mysqli_error($conn);
+        }
+    } else {
+        $pdo->exec($sql);
+        echo "✅ Table 'users' created successfully";
+    }
+} catch (PDOException $e) {
+    echo "❌ Error creating table: " . $e->getMessage();
 }
 ?>
