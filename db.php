@@ -1,6 +1,6 @@
 <?php
 $host = "tools-a-mysql.env-te2ifplcfh";      // Nimbuz DB host
-$user = "sa";       // MySQL username
+$user = "root";       // MySQL username
 $pass = "Test@123";   // MySQL password
 $db   = "sample";       // Database name
 
