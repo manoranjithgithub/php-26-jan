@@ -2,7 +2,9 @@
   "name": "example/app",
   "description": "Simple PHP app for Railpack detection",
   "require": {
-    "php": ">=8.4"
+    "php": ">=8.4",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*"
   },
   "autoload": {
     "psr-4": {
