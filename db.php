@@ -1,38 +1,18 @@
 <?php
-// Database config - use env vars when available
-$host = getenv('DB_HOST') ?: "tech-1-mssql.env-te2ifplcfh";      // Nimbuz DB host
-$user = getenv('DB_USER') ?: "sa";       // MySQL username
-$pass = getenv('DB_PASS') ?: "Test@123";   // MySQL password
-$db   = getenv('DB_NAME') ?: "sample";     // Database name
+$host = getenv('DB_HOST') ?: "tech-1-mssql.env-te2ifplcfh";
+$user = getenv('DB_USER') ?: "sa";
+$pass = getenv('DB_PASS') ?: "Test@123";
+$db   = getenv('DB_NAME') ?: "sample";
 
-$DB_TYPE = null;
-$conn = null; // mysqli connection
-$pdo = null;  // PDO connection
+try {
+    $dsn = "sqlsrv:Server=$host;Database=$db";
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
 
-// Prefer mysqli if available for backward compatibility
-if (function_exists('mysqli_connect')) {
-    $conn = mysqli_connect($host, $user, $pass, $db);
-    if (!$conn) {
-        die("❌ Database connection failed (mysqli): " . mysqli_connect_error());
-    }
-    $DB_TYPE = 'mysqli';
-    echo "✅ Database connected successfully (mysqli)<br>";
+    echo "✅ Database connected successfully (MSSQL PDO)<br>";
 
-// Fallback to PDO if mysqli is not available
-} elseif (class_exists('PDO')) {
-    try {
-        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-        $pdo = new PDO($dsn, $user, $pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]);
-        $DB_TYPE = 'pdo';
-        echo "✅ Database connected successfully (PDO)<br>";
-    } catch (PDOException $e) {
-        die("❌ Database connection failed (PDO): " . $e->getMessage());
-    }
-
-} else {
-    die("❌ Neither mysqli nor PDO (pdo_mysql) extensions are available. Please enable the `mysqli` or `pdo_mysql` PHP extension.");
+} catch (PDOException $e) {
+    die("❌ Database connection failed: " . $e->getMessage());
 }
-?>

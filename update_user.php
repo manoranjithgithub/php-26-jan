@@ -11,21 +11,20 @@ if (!$id || !$name || !$email) {
 }
 
 try {
-    if ($DB_TYPE === 'mysqli') {
-        $stmt = $conn->prepare("UPDATE users SET name=?, email=? WHERE id=?");
-        $stmt->bind_param('ssi', $name, $email, $id);
-        if ($stmt->execute()) {
-            echo "✅ User updated successfully";
-        } else {
-            echo "❌ Error: " . $stmt->error;
-        }
-        $stmt->close();
-    } else {
-        $stmt = $pdo->prepare("UPDATE users SET name=:name, email=:email WHERE id=:id");
-        $stmt->execute([':name' => $name, ':email' => $email, ':id' => $id]);
-        echo "✅ User updated successfully";
-    }
+    $stmt = $pdo->prepare(
+        "UPDATE users 
+         SET name = :name, email = :email 
+         WHERE id = :id"
+    );
+
+    $stmt->execute([
+        ':id'    => $id,
+        ':name'  => $name,
+        ':email' => $email
+    ]);
+
+    echo "✅ User updated successfully";
+
 } catch (PDOException $e) {
     echo "❌ Error: " . $e->getMessage();
 }
-?>
