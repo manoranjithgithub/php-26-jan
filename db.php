@@ -1,5 +1,5 @@
 <?php
-$host = getenv('DB_HOST') ?: "tech-1-mssql.env-te2ifplcfh";
+$host = getenv('DB_HOST') ?: "sa-mysql.env-0smnu91sqb";
 $user = getenv('DB_USER') ?: "sa";
 $pass = getenv('DB_PASS') ?: "Test@123";
 $db   = getenv('DB_NAME') ?: "sample";
