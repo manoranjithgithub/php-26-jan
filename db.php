@@ -3,7 +3,7 @@
 $host = getenv('DB_HOST') ?: "new-mysq-mysql.env-wmion15tww";      // Nimbuz DB host
 $user = getenv('DB_USER') ?: "root";       // MySQL username
 $pass = getenv('DB_PASS') ?: "Test@123";   // MySQL password
-$db   = getenv('DB_NAME') ?: "sample";     // Database name
+$db   = getenv('DB_NAME') ?: "my_database";     // Database name
 
 $DB_TYPE = null;
 $conn = null; // mysqli connection
