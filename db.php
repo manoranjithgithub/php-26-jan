@@ -1,6 +1,6 @@
 <?php
 // Database config - use env vars when available
-$host = getenv('DB_HOST') ?: "mysql-env-wmion15tww.ap-south-1a.lb.nimbuz.tech";      // Nimbuz DB host
+$host = getenv('DB_HOST') ?: "new-mysq-mysql.env-wmion15tww";      // Nimbuz DB host
 $user = getenv('DB_USER') ?: "root";       // MySQL username
 $pass = getenv('DB_PASS') ?: "Test@123";   // MySQL password
 $db   = getenv('DB_NAME') ?: "sample";     // Database name
